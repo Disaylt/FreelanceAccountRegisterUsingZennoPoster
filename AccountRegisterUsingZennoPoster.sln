@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProxyLayer", "ProxyLayer\Pr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneNumbersLayer", "PhoneNumbersLayer\PhoneNumbersLayer.csproj", "{4CD3DFE4-86D0-4014-BE27-43D58B56585C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpManager", "HttpManager\HttpManager.csproj", "{9DBA8722-C1C9-4D3C-88FA-96FD5DBF048B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{4CD3DFE4-86D0-4014-BE27-43D58B56585C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CD3DFE4-86D0-4014-BE27-43D58B56585C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4CD3DFE4-86D0-4014-BE27-43D58B56585C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DBA8722-C1C9-4D3C-88FA-96FD5DBF048B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DBA8722-C1C9-4D3C-88FA-96FD5DBF048B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DBA8722-C1C9-4D3C-88FA-96FD5DBF048B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DBA8722-C1C9-4D3C-88FA-96FD5DBF048B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
