@@ -1,5 +1,5 @@
-﻿using AccountRegisterApplication.RegisterManager.Abstract;
-using AccountRegisterApplication.RegisterManager.Implementations;
+﻿using AccountRegisterApplication.RegisterManagers.Abstract;
+using AccountRegisterApplication.RegisterManagers.Implementations;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,7 +31,7 @@ namespace AccountRegisterApplication
         {
             int executionResult = 0;
 
-            IRegisterManager registerManager = new WbRegisterManager(instance, project);
+            RegisterManager registerManager = new WbRegisterManager(instance, project);
             registerManager.StartRegistration();
 
             return executionResult;

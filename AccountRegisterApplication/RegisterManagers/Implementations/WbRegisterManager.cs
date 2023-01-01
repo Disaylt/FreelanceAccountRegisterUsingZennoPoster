@@ -1,4 +1,4 @@
-﻿using AccountRegisterApplication.RegisterManager.Abstract;
+﻿using AccountRegisterApplication.RegisterManagers.Abstract;
 using AccountRegisterApplication.RegisterServices.WB;
 using System;
 using System.Collections.Generic;
@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 using ZennoLab.CommandCenter;
 using ZennoLab.InterfacesLibrary.ProjectModel;
 
-namespace AccountRegisterApplication.RegisterManager.Implementations
+namespace AccountRegisterApplication.RegisterManagers.Implementations
 {
-    internal class WbRegisterManager : IRegisterManager
+    internal class WbRegisterManager : RegisterManager
     {
         private readonly WbBrowserActions _wbBrowserActions;
         public WbRegisterManager(Instance instance, IZennoPosterProjectModel project)
@@ -18,9 +18,9 @@ namespace AccountRegisterApplication.RegisterManager.Implementations
             _wbBrowserActions = new WbBrowserActions(instance);
         }
 
-        public void StartRegistration()
+        public override void StartRegistration()
         {
-            _wbBrowserActions.LoadRegisterPage();
+            throw new NotImplementedException();
         }
     }
 }

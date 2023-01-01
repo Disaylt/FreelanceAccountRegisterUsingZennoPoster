@@ -80,11 +80,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\AppSettings\ProxySettings.cs" />
     <Compile Include="Models\AppSettings\Settings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegisterManager\Abstract\IRegisterManager.cs" />
-    <Compile Include="RegisterManager\Implementations\WbRegisterManager.cs" />
+    <Compile Include="RegisterManagers\Abstract\RegisterManager.cs" />
+    <Compile Include="RegisterManagers\Implementations\WbRegisterManager.cs" />
     <Compile Include="RegisterServices\WB\WbBrowserActions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
