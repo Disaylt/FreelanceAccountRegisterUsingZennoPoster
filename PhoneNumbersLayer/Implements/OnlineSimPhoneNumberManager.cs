@@ -32,7 +32,14 @@ namespace PhoneNumbersLayer.Implements
 
         public string GetMessage()
         {
-            throw new NotImplementedException();
+            if( _task == null)
+            {
+                return null;
+            }
+
+            PhoneNumberStateModel phoneNumberState = GetState();
+
+            return phoneNumberState.Msg;
         }
 
         public string GetNumber()
@@ -53,6 +60,18 @@ namespace PhoneNumbersLayer.Implements
             TaskModel task = JToken.Parse(content).ToObject<TaskModel>();
 
             return task;
+        }
+
+        private PhoneNumberStateModel GetState()
+        {
+            string url = $"https://onlinesim.ru/api/getState.php?apikey={_phoneNumbersSettings.Token}&tzid={_task.Tzid}";
+            string content = _httpSender.Send(HttpMethod.Get, url)
+                .Content
+                .ReadAsStringAsync()
+                .Result;
+            PhoneNumberStateModel phoneNumberStateModel = JObject.Parse(content).ToObject<PhoneNumberStateModel>();
+
+            return phoneNumberStateModel;
         }
     }
 }

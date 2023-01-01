@@ -8,7 +8,6 @@ namespace PhoneNumbersLayer.Models
 {
     public class PhoneNumbersSettings
     {
-        public string ServiceName { get; set; }
         public string Token { get; set; }
         public string Service { get; set; }
 

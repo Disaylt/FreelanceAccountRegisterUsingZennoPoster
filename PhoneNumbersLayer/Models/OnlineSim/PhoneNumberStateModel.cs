@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace PhoneNumbersLayer.Models.OnlineSim
 {
-    internal class TaskModel
+    internal class PhoneNumberStateModel
     {
-        public int Tzid { get; set; }
-        public string PhoneNumber { get; set; }
-        public DateTime CreateDate { get; set; } = DateTime.Now;
+        public string Number { get; set; }
+        public string Msg { get; set; }
+        public int Time { get; set; }
     }
 }

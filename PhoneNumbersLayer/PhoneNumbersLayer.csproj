@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Abstarct\IPhoneNumberManager.cs" />
     <Compile Include="Implements\OnlineSimPhoneNumberManager.cs" />
+    <Compile Include="Models\OnlineSim\PhoneNumberStateModel.cs" />
     <Compile Include="Models\OnlineSim\TaskModel.cs" />
     <Compile Include="Models\PhoneNumbersSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
