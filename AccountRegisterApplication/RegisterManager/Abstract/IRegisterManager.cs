@@ -8,6 +8,6 @@ namespace AccountRegisterApplication.RegisterManager.Abstract
 {
     internal interface IRegisterManager
     {
-        void Start();
+        void StartRegistration();
     }
 }

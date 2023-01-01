@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AccountRegisterApplication.RegisterManager.Abstract;
+using AccountRegisterApplication.RegisterManager.Implementations;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,6 +30,9 @@ namespace AccountRegisterApplication
         public int Execute(Instance instance, IZennoPosterProjectModel project)
         {
             int executionResult = 0;
+
+            IRegisterManager registerManager = new WbRegisterManager(instance, project);
+            registerManager.StartRegistration();
 
             return executionResult;
         }
