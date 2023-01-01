@@ -1,4 +1,5 @@
 ﻿using AccountRegisterApplication.Models.AppSettings;
+using AccountRegisterApplication.RegisterServices.Proxy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,17 +12,35 @@ namespace AccountRegisterApplication.RegisterManagers.Abstract
 {
     internal abstract class RegisterManager
     {
+        private readonly ProxyLoader _proxyLoader;
         public RegisterManager(Instance instance, IZennoPosterProjectModel project, ApplicationSettings settings)
         {
             Instance = instance;
             Project = project;
             Settings = settings;
+
+            _proxyLoader = new ProxyLoader(settings.ProxySettings);
+
+            SetManagerProperties();
+            SetProxy();
         }
 
         protected Instance Instance { get; }
         protected IZennoPosterProjectModel Project { get; }
         protected ApplicationSettings Settings { get; }
 
+        public string Proxy { get; private set; }
+
         public abstract void StartRegistration();
+
+        private void SetManagerProperties()
+        {
+            Proxy = _proxyLoader.LoadProxy();
+        }
+
+        private void SetProxy()
+        {
+            Instance.SetProxy(Proxy, emulateGeolocation: true, emulateTimezone: true, emulateWebrtc: true);
+        }
     }
 }

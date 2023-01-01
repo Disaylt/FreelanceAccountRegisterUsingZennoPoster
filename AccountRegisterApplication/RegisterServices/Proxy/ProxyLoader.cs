@@ -10,20 +10,26 @@ using ZennoLab.CommandCenter;
 
 namespace AccountRegisterApplication.RegisterServices.Proxy
 {
-    internal class ProxyInstanceInstaller
+    internal class ProxyLoader
     {
         private readonly ApplicationProxySettings _proxySettings;
 
-        public ProxyInstanceInstaller(ApplicationProxySettings proxySettings)
+        public ProxyLoader(ApplicationProxySettings proxySettings)
         {
             _proxySettings = proxySettings;
         }
 
-        public void SetProxy(Instance instance)
+        public string LoadProxy()
         {
+            if(_proxySettings == null || string.IsNullOrEmpty(_proxySettings.LoaderType))
+            {
+                throw new NullReferenceException("Proxy settings is null");
+            }
+
             IProxyLoader proxyLoader = GetProxyLoader();
             string proxy = proxyLoader.Get();
-            instance.SetProxy(proxy, emulateGeolocation: true, emulateTimezone: true, emulateWebrtc: true);
+
+            return proxy;
         }
 
         private IProxyLoader GetProxyLoader()
