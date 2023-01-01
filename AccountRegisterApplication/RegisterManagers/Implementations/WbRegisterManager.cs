@@ -1,4 +1,5 @@
-﻿using AccountRegisterApplication.RegisterManagers.Abstract;
+﻿using AccountRegisterApplication.Models.AppSettings;
+using AccountRegisterApplication.RegisterManagers.Abstract;
 using AccountRegisterApplication.RegisterServices.WB;
 using System;
 using System.Collections.Generic;
@@ -13,14 +14,14 @@ namespace AccountRegisterApplication.RegisterManagers.Implementations
     internal class WbRegisterManager : RegisterManager
     {
         private readonly WbBrowserActions _wbBrowserActions;
-        public WbRegisterManager(Instance instance, IZennoPosterProjectModel project)
+        public WbRegisterManager(Instance instance, IZennoPosterProjectModel project, ApplicationSettings applicationSettings) : base(instance, project, applicationSettings)
         {
             _wbBrowserActions = new WbBrowserActions(instance);
         }
 
         public override void StartRegistration()
         {
-            throw new NotImplementedException();
+            _wbBrowserActions.LoadRegisterPage();
         }
     }
 }

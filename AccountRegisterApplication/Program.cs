@@ -1,4 +1,5 @@
-﻿using AccountRegisterApplication.RegisterManagers.Abstract;
+﻿using AccountRegisterApplication.Models.AppSettings;
+using AccountRegisterApplication.RegisterManagers.Abstract;
 using AccountRegisterApplication.RegisterManagers.Implementations;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,17 @@ namespace AccountRegisterApplication
         {
             int executionResult = 0;
 
-            RegisterManager registerManager = new WbRegisterManager(instance, project);
+            ApplicationSettings applicationSettings = new ApplicationSettings
+            {
+                Site = "wb",
+                ProxySettings = new ApplicationProxySettings
+                {
+                    FileName = "proxiesList.txt",
+                    LoaderType = "txt"
+                }
+            };
+
+            RegisterManager registerManager = new WbRegisterManager(instance, project, applicationSettings);
             registerManager.StartRegistration();
 
             return executionResult;
