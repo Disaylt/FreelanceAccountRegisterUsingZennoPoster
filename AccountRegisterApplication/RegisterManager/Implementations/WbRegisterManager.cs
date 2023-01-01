@@ -9,6 +9,7 @@ namespace AccountRegisterApplication.RegisterManager.Implementations
 {
     internal class WbRegisterManager : IRegisterManager
     {
+
         public void Start()
         {
             throw new NotImplementedException();
