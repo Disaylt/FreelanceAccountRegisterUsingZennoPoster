@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IProxyLoader.cs" />
+    <Compile Include="Factory\IProxyLoaderFactory.cs" />
+    <Compile Include="Factory\TxtProxyLoaderFactory.cs" />
     <Compile Include="Implementations\TxtProxyLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
