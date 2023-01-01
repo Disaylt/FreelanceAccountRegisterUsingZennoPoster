@@ -80,12 +80,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\AppSettings\ProxySettings.cs" />
-    <Compile Include="Models\AppSettings\Settings.cs" />
+    <Compile Include="Models\AppSettings\ApplicationProxySettings.cs" />
+    <Compile Include="Models\AppSettings\ApplicationSettings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterManagers\Abstract\RegisterManager.cs" />
     <Compile Include="RegisterManagers\Implementations\WbRegisterManager.cs" />
+    <Compile Include="RegisterServices\Proxy\ProxyInstanceInstaller.cs" />
     <Compile Include="RegisterServices\WB\WbBrowserActions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -113,5 +114,10 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ProxyLayer\ProxyLayer.csproj">
+      <Project>{09EF2F68-6EDB-4C5E-AFE7-8564225379B6}</Project>
+      <Name>ProxyLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace AccountRegisterApplication.Models.AppSettings
 {
-    internal class Settings
+    internal class ApplicationProxySettings
     {
-        public string Site { get; set; }
-        public ProxySettings ProxySettings { get; set; }
+        public string LoaderType { get; set; }
+        public string FileName { get; set; }
     }
 }
