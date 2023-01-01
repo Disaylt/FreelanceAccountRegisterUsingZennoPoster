@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,8 +46,18 @@
   <ItemGroup>
     <Compile Include="Abstarct\IPhoneNumberManager.cs" />
     <Compile Include="Implements\OnlineSimPhoneNumberManager.cs" />
+    <Compile Include="Models\OnlineSim\TaskModel.cs" />
+    <Compile Include="Models\PhoneNumbersSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\HttpManager\HttpManager.csproj">
+      <Project>{9DBA8722-C1C9-4D3C-88FA-96FD5DBF048B}</Project>
+      <Name>HttpManager</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
