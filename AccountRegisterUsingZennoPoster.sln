@@ -5,6 +5,8 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountRegisterApplication", "AccountRegisterApplication\AccountRegisterApplication.csproj", "{59404816-BD21-411A-A20C-166A05547B41}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProxyLayer", "ProxyLayer\ProxyLayer.csproj", "{09EF2F68-6EDB-4C5E-AFE7-8564225379B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{59404816-BD21-411A-A20C-166A05547B41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59404816-BD21-411A-A20C-166A05547B41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59404816-BD21-411A-A20C-166A05547B41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09EF2F68-6EDB-4C5E-AFE7-8564225379B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09EF2F68-6EDB-4C5E-AFE7-8564225379B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09EF2F68-6EDB-4C5E-AFE7-8564225379B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09EF2F68-6EDB-4C5E-AFE7-8564225379B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
