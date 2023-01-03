@@ -1,6 +1,7 @@
 ﻿using AccountRegisterApplication.Models.AppSettings;
 using AccountRegisterApplication.RegisterManagers.Abstract;
 using AccountRegisterApplication.RegisterManagers.Implementations;
+using PhoneNumbersLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,6 +40,15 @@ namespace AccountRegisterApplication
                 {
                     FileName = "proxiesList.txt",
                     LoaderType = "txt"
+                },
+                AplicationSmsManagerSettings = new AplicationSmsManagerSettings
+                {
+                    ServiceName = "onlineSim",
+                    PhoneNumbersSettings = new PhoneNumbersSettings
+                    {
+                        Service = "wildberries",
+                        Token = "b3967D3nJz6H6Cx-N1rE81Ap-v1t6563G-c6h2MV6m-2AbSRv4K33XkQ32"
+                    }
                 }
             };
 

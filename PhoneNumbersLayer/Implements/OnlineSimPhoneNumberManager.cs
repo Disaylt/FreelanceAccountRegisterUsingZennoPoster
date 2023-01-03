@@ -49,7 +49,7 @@ namespace PhoneNumbersLayer.Implements
                 _task = GetTaskModel();
             }
 
-            return _task.PhoneNumber;
+            return _task.Number;
         }
 
         private TaskModel GetTaskModel()

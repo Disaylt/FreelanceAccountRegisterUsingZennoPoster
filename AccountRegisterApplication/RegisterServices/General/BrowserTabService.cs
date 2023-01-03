@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -15,6 +16,12 @@ namespace AccountRegisterApplication.RegisterServices.General
         public BrowserTabService(Instance instance)
         {
             _instance = instance;
+        }
+
+        public void InputText(string xPathElement, string inputText)
+        {
+            HtmlElement htmlElement = _instance.ActiveTab.GetDocumentByAddress("0").FindElementByXPath(xPathElement, 0);
+            htmlElement.SetValue(inputText, _instance.EmulationLevel, true);
         }
 
         public bool WaitElement(string xpath, int waitTimeInSecond)

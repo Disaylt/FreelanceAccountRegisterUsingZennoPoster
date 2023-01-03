@@ -9,7 +9,7 @@ namespace PhoneNumbersLayer.Models.OnlineSim
     internal class TaskModel
     {
         public int Tzid { get; set; }
-        public string PhoneNumber { get; set; }
+        public string Number { get; set; }
         public DateTime CreateDate { get; set; } = DateTime.Now;
     }
 }

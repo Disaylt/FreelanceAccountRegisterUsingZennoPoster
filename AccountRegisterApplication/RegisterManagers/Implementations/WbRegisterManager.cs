@@ -22,6 +22,13 @@ namespace AccountRegisterApplication.RegisterManagers.Implementations
         public override void StartRegistration()
         {
             _wbBrowserActions.LoadRegisterPage();
+            WritePhoneNumber();
+        }
+
+        private void WritePhoneNumber()
+        {
+            string phoneNumber = "9041219059";
+            _wbBrowserActions.WritePhoneNumber(phoneNumber);
         }
     }
 }
