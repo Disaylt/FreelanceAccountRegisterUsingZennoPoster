@@ -1,4 +1,5 @@
 ﻿using AccountRegisterApplication.Models.AppSettings;
+using AccountRegisterApplication.RegisterServices.PhoneNumber;
 using AccountRegisterApplication.RegisterServices.Proxy;
 using PhoneNumbersLayer.Abstarct;
 using System;
@@ -23,8 +24,9 @@ namespace AccountRegisterApplication.RegisterManagers.Abstract
             _proxyLoader = new ProxyLoader(settings.ProxySettings);
 
             SetManagerProperties();
-
             SetProxy();
+
+            PhoneNumberManager = GetPhoneNumberManager(settings);
         }
 
         protected Instance Instance { get; }
@@ -39,6 +41,13 @@ namespace AccountRegisterApplication.RegisterManagers.Abstract
         private void SetManagerProperties()
         {
             Proxy = _proxyLoader.LoadProxy();
+        }
+
+        private IPhoneNumberManager GetPhoneNumberManager(ApplicationSettings settings)
+        {
+            PhoneNumberManagerBuilder phoneNumberManagerBuilder = new PhoneNumberManagerBuilder(settings.AplicationSmsManagerSettings);
+
+            return phoneNumberManagerBuilder.Get();
         }
 
         private void SetProxy()

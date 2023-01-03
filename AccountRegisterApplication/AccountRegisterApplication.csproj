@@ -88,6 +88,7 @@
     <Compile Include="RegisterManagers\Abstract\RegisterManager.cs" />
     <Compile Include="RegisterManagers\Implementations\WbRegisterManager.cs" />
     <Compile Include="RegisterServices\General\BrowserTabService.cs" />
+    <Compile Include="RegisterServices\PhoneNumber\PhoneNumberManagerBuilder.cs" />
     <Compile Include="RegisterServices\Proxy\ProxyLoader.cs" />
     <Compile Include="RegisterServices\WB\WbBrowserActions.cs" />
   </ItemGroup>

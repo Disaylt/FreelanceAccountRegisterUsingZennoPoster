@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace PhoneNumbersLayer.Implements
 {
-    internal class OnlineSimPhoneNumberManager : IPhoneNumberManager
+    public class OnlineSimPhoneNumberManager : IPhoneNumberManager
     {
         private readonly IHttpSender _httpSender;
         private readonly PhoneNumbersSettings _phoneNumbersSettings;
