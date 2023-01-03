@@ -1,5 +1,6 @@
 ﻿using AccountRegisterApplication.Models.AppSettings;
 using AccountRegisterApplication.RegisterServices.Proxy;
+using PhoneNumbersLayer.Abstarct;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,11 +23,13 @@ namespace AccountRegisterApplication.RegisterManagers.Abstract
             _proxyLoader = new ProxyLoader(settings.ProxySettings);
 
             SetManagerProperties();
+
             SetProxy();
         }
 
         protected Instance Instance { get; }
         protected IZennoPosterProjectModel Project { get; }
+        protected IPhoneNumberManager PhoneNumberManager { get; }
         protected ApplicationSettings Settings { get; }
 
         public string Proxy { get; private set; }

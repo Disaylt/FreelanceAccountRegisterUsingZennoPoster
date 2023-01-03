@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,7 +25,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -80,6 +80,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\AppSettings\AplicationSmsManagerSettings.cs" />
     <Compile Include="Models\AppSettings\ApplicationProxySettings.cs" />
     <Compile Include="Models\AppSettings\ApplicationSettings.cs" />
     <Compile Include="Program.cs" />
@@ -115,6 +116,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PhoneNumbersLayer\PhoneNumbersLayer.csproj">
+      <Project>{4CD3DFE4-86D0-4014-BE27-43D58B56585C}</Project>
+      <Name>PhoneNumbersLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ProxyLayer\ProxyLayer.csproj">
       <Project>{09EF2F68-6EDB-4C5E-AFE7-8564225379B6}</Project>
       <Name>ProxyLayer</Name>
