@@ -1,10 +1,12 @@
 ﻿using AccountRegisterApplication.Models.AppSettings;
 using AccountRegisterApplication.RegisterManagers.Abstract;
 using AccountRegisterApplication.RegisterServices.WB;
+using CaptchaLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using ZennoLab.CommandCenter;
 using ZennoLab.InterfacesLibrary.ProjectModel;
@@ -23,6 +25,19 @@ namespace AccountRegisterApplication.RegisterManagers.Implementations
         {
             _wbBrowserActions.LoadRegisterPage();
             WritePhoneNumber();
+            _wbBrowserActions.ClickForGettingCode();
+            WriteCaptchaCode();
+            _wbBrowserActions.ClickToContunueAfterWriteCode();
+
+        }
+
+        private void WriteCaptchaCode()
+        {
+            string base64Captcha = _wbBrowserActions.GetRegisterCaptchaAsBase64();
+            RuCaptchaResult ruCaptchaResult = CaptchaService.Send(base64Captcha);
+            Thread.Sleep(10 * 1000);
+            string code = CaptchaService.Get(ruCaptchaResult);
+            _wbBrowserActions.InputCaptchaCode(code);
         }
 
         private void WritePhoneNumber()

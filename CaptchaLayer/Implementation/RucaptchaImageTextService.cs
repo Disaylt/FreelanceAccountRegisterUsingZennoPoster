@@ -29,7 +29,7 @@ namespace CaptchaLayer.Implementation
 
         public string Get(RuCaptchaResult serviceResult)
         {
-            string url = $"http://rucaptcha.com/res.php?key={_token}&action=get&id={serviceResult.Request}";
+            string url = $"http://rucaptcha.com/res.php?key={_token}&action=get&id={serviceResult.Request}&json=1";
             int maxAttempts = 5;
             int timeoutSec = 7;
 
