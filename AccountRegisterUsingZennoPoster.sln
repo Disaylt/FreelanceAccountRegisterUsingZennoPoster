@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneNumbersLayer", "PhoneN
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpManager", "HttpManager\HttpManager.csproj", "{9DBA8722-C1C9-4D3C-88FA-96FD5DBF048B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptchaLayer", "CaptchaLayer\CaptchaLayer.csproj", "{F95488B0-24E7-4750-A4EC-6F93EDFA654C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{9DBA8722-C1C9-4D3C-88FA-96FD5DBF048B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DBA8722-C1C9-4D3C-88FA-96FD5DBF048B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DBA8722-C1C9-4D3C-88FA-96FD5DBF048B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F95488B0-24E7-4750-A4EC-6F93EDFA654C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F95488B0-24E7-4750-A4EC-6F93EDFA654C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F95488B0-24E7-4750-A4EC-6F93EDFA654C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F95488B0-24E7-4750-A4EC-6F93EDFA654C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
