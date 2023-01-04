@@ -18,9 +18,22 @@ namespace AccountRegisterApplication.RegisterServices.General
             _instance = instance;
         }
 
-        public void InputText(string xPathElement, string inputText)
+        public HtmlElement GetHtmlElement(string xPathElement)
         {
             HtmlElement htmlElement = _instance.ActiveTab.GetDocumentByAddress("0").FindElementByXPath(xPathElement, 0);
+
+            return htmlElement;
+        }
+
+        public void Click(string xPathElement)
+        {
+            HtmlElement htmlElement = GetHtmlElement(xPathElement);
+            htmlElement.Click();
+        }
+
+        public void InputText(string xPathElement, string inputText)
+        {
+            HtmlElement htmlElement = GetHtmlElement(xPathElement);
             htmlElement.SetValue(inputText, _instance.EmulationLevel, true);
         }
 
@@ -28,8 +41,8 @@ namespace AccountRegisterApplication.RegisterServices.General
         {
             for(int i = 0; i < waitTimeInSecond; i++)
             {
-                HtmlElement htmlElement = _instance.ActiveTab.GetDocumentByAddress("0").FindElementByXPath(xpath, 0);
-                if(!htmlElement.IsNull && !htmlElement.IsVoid)
+                HtmlElement htmlElement = GetHtmlElement(xPathElement);
+                if (!htmlElement.IsNull && !htmlElement.IsVoid)
                 {
                     return true;
                 }

@@ -24,15 +24,55 @@ namespace AccountRegisterApplication.RegisterServices.WB
             _instance.ActiveTab.Navigate("https://www.wildberries.ru/security/login");
         }
 
+        public void ClickToContunueAfterWriteCode()
+        {
+            string elementXPath = "//button[@class='login__btn btn-main-lg']";
+            WaitElement(elementXPath);
+            _browserTabService.Click(elementXPath);
+        }
+
+        public void InputCaptchaCode(string code)
+        {
+            string elementXPath = "//input[@id='smsCaptchaCode']";
+            WaitElement(elementXPath);
+
+            _browserTabService.InputText(elementXPath, code);
+        }
+
+        public string GetRegisterCaptchaAsBase64()
+        {
+            string elementXPath = "//img[@class='form-block__captcha-img']";
+            WaitElement(elementXPath);
+
+            HtmlElement htmlElement = _browserTabService.GetHtmlElement(elementXPath);
+            string srcValue = htmlElement.GetAttribute("src");
+            string base64 = srcValue.Replace("data:image/jpeg;base64,", string.Empty);
+
+            return base64;
+        }
+
+        public void ClickForGettingCode()
+        {
+            string elementXPath = "//button[@id='requestCode']";
+            WaitElement(elementXPath);
+            _browserTabService.Click(elementXPath);
+
+        }
+
         public void WritePhoneNumber(string phoneNumberWithoutCode)
         {
             string elementXPath = "//input[@inputmode='tel' and @class='input-item']";
-            bool isExists = _browserTabService.WaitElement(elementXPath, 20);
-
-            if (!isExists)
-                throw new NullReferenceException($"{elementXPath} not found");
+            WaitElement(elementXPath);
 
             _browserTabService.InputText(elementXPath, phoneNumberWithoutCode);
+        }
+
+        private void WaitElement(string xPath)
+        {
+            bool isExists = _browserTabService.WaitElement(xPath, 20);
+
+            if (!isExists)
+                throw new NullReferenceException($"{xPath} not found");
         }
     }
 }
