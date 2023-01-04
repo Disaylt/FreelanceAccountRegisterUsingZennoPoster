@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="Models\AppSettings\AplicationSmsManagerSettings.cs" />
     <Compile Include="Models\AppSettings\ApplicationProxySettings.cs" />
+    <Compile Include="Models\AppSettings\ApplicationRuCaptchaSettings.cs" />
     <Compile Include="Models\AppSettings\ApplicationSettings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -118,6 +119,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CaptchaLayer\CaptchaLayer.csproj">
+      <Project>{F95488B0-24E7-4750-A4EC-6F93EDFA654C}</Project>
+      <Name>CaptchaLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PhoneNumbersLayer\PhoneNumbersLayer.csproj">
       <Project>{4CD3DFE4-86D0-4014-BE27-43D58B56585C}</Project>
       <Name>PhoneNumbersLayer</Name>

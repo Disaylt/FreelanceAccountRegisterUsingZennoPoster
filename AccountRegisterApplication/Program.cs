@@ -49,6 +49,10 @@ namespace AccountRegisterApplication
                         Service = "wildberries",
                         Token = "b3967D3nJz6H6Cx-N1rE81Ap-v1t6563G-c6h2MV6m-2AbSRv4K33XkQ32"
                     }
+                },
+                ApplicationRuCaptchaSettings = new ApplicationRuCaptchaSettings
+                {
+                    Token = "2114087ecebcff0dcf157c253eecf554"
                 }
             };
 

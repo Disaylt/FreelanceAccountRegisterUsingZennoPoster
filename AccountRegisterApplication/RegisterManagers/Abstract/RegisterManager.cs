@@ -1,6 +1,9 @@
 ﻿using AccountRegisterApplication.Models.AppSettings;
 using AccountRegisterApplication.RegisterServices.PhoneNumber;
 using AccountRegisterApplication.RegisterServices.Proxy;
+using CaptchaLayer.Abstract;
+using CaptchaLayer.Implementation;
+using CaptchaLayer.Models;
 using PhoneNumbersLayer.Abstarct;
 using System;
 using System.Collections.Generic;
@@ -27,11 +30,13 @@ namespace AccountRegisterApplication.RegisterManagers.Abstract
             SetProxy();
 
             PhoneNumberManager = GetPhoneNumberManager(settings);
+            CaptchaService = new RucaptchaImageTextService(settings.ApplicationRuCaptchaSettings.Token);
         }
 
         protected Instance Instance { get; }
         protected IZennoPosterProjectModel Project { get; }
         protected IPhoneNumberManager PhoneNumberManager { get; }
+        protected ICaptchaService<string, string, RuCaptchaResult> CaptchaService { get; }
         protected ApplicationSettings Settings { get; }
 
         public string Proxy { get; private set; }

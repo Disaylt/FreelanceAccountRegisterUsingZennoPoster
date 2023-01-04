@@ -41,7 +41,7 @@ namespace AccountRegisterApplication.RegisterServices.General
         {
             for(int i = 0; i < waitTimeInSecond; i++)
             {
-                HtmlElement htmlElement = GetHtmlElement(xPathElement);
+                HtmlElement htmlElement = GetHtmlElement(xpath);
                 if (!htmlElement.IsNull && !htmlElement.IsVoid)
                 {
                     return true;
