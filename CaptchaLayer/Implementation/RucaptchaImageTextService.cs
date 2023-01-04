@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CaptchaLayer.Implementation
@@ -28,7 +29,23 @@ namespace CaptchaLayer.Implementation
 
         public string Get(RuCaptchaResult serviceResult)
         {
-            throw new NotImplementedException();
+            string url = $"http://rucaptcha.com/res.php?key={_token}&action=get&id={serviceResult.Request}";
+            int maxAttempts = 5;
+            int timeoutSec = 7;
+
+            for(int attempt = 1; attempt < maxAttempts; attempt++)
+            {
+                HttpResponseMessage response = _httpSender.Send(HttpMethod.Get, url);
+                string responseContent = response.Content.ReadAsStringAsync().Result;
+                RuCaptchaResult ruCaptchaResult = JObject.Parse(responseContent).ToObject<RuCaptchaResult>();
+
+                if (ruCaptchaResult.Status == 1)
+                    return ruCaptchaResult.Request;
+
+                Thread.Sleep(1000 * timeoutSec);
+            }
+
+            throw new NullReferenceException("Failed to get captcha code.");
         }
 
         public RuCaptchaResult Send(string base64)
