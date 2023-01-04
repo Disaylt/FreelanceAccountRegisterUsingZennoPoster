@@ -11,5 +11,6 @@ namespace PhoneNumbersLayer.Models.OnlineSim
         public string Number { get; set; }
         public string Msg { get; set; }
         public int Time { get; set; }
+        public int Tzid { get; set; }
     }
 }

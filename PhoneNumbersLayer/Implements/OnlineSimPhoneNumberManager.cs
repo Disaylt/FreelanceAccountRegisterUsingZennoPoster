@@ -46,9 +46,9 @@ namespace PhoneNumbersLayer.Implements
                 return null;
             }
 
-            PhoneNumberStateModel phoneNumberState = GetState();
+            string message = WaitMassage();
 
-            return phoneNumberState.Msg;
+            return message;
         }
 
         public string GetNumber()
@@ -59,6 +59,21 @@ namespace PhoneNumbersLayer.Implements
             }
 
             return _task.Number;
+        }
+
+        private string WaitMassage()
+        {
+            int maxAttempt = 5;
+            for(int currentAttempt = 0; currentAttempt < maxAttempt; currentAttempt++)
+            {
+                PhoneNumberStateModel phoneNumberState = GetState();
+                if (phoneNumberState.Msg != null)
+                    return phoneNumberState.Msg;
+
+                Thread.Sleep(5 * 1000);
+            }
+
+            throw new NullReferenceException("Sms cod ewas not received.");
         }
 
         private void SetOkStatus()
@@ -84,7 +99,8 @@ namespace PhoneNumbersLayer.Implements
                 .Content
                 .ReadAsStringAsync()
                 .Result;
-            PhoneNumberStateModel phoneNumberStateModel = JObject.Parse(content).ToObject<PhoneNumberStateModel>();
+            List<PhoneNumberStateModel> phoneNumbersStateModel = JObject.Parse(content).ToObject<List<PhoneNumberStateModel>>();
+            PhoneNumberStateModel phoneNumberStateModel = phoneNumbersStateModel.First(x=> x.Tzid == _task.Tzid);
 
             return phoneNumberStateModel;
         }

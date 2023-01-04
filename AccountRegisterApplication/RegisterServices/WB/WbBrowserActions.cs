@@ -24,7 +24,7 @@ namespace AccountRegisterApplication.RegisterServices.WB
             _instance.ActiveTab.Navigate("https://www.wildberries.ru/security/login");
         }
 
-        public void ClickToContunueAfterWriteCode()
+        public void ClickToContunueAfterWriteCaptchaCode()
         {
             string elementXPath = "//button[@class='login__btn btn-main-lg']";
             WaitElement(elementXPath);
