@@ -30,6 +30,8 @@ namespace AccountRegisterApplication.RegisterManagers.Implementations
                 _wbBrowserActions.ClickForGettingCode();
                 WriteCaptchaCode();
                 _wbBrowserActions.ClickToContunueAfterWriteCaptchaCode();
+                string code = GetCode();
+                _wbBrowserActions.WriteSmsCode(code);
             }
             finally
             {
@@ -37,9 +39,20 @@ namespace AccountRegisterApplication.RegisterManagers.Implementations
             }
         }
 
-        private void WritePhoneNumberCode()
+        private string GetCode()
         {
+            string message = PhoneNumberManager.GetMessage();
+            string fourNumberCode;
+            if(message.Length > 4)
+            {
+                fourNumberCode = message.Substring(message.Length - 4);
+            }
+            else
+            {
+                fourNumberCode = message;
+            }
 
+            return fourNumberCode;
         }
 
         private void WriteCaptchaCode()
