@@ -27,7 +27,8 @@ namespace AccountRegisterApplication.RegisterManagers.Implementations
 
         private void WritePhoneNumber()
         {
-            string phoneNumber = "9041219059";
+            string phoneNumber = PhoneNumberManager.GetNumber()
+                .Substring(2);
             _wbBrowserActions.WritePhoneNumber(phoneNumber);
         }
     }
