@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PhoneNumbersLayer.Implements
@@ -27,7 +28,15 @@ namespace PhoneNumbersLayer.Implements
 
         public void Complete()
         {
-            throw new NotImplementedException();
+            if (_task != null)
+            {
+                PhoneNumberStateModel state = GetState();
+                int minTimeForCloseTask = 780;
+                if (state.Time > minTimeForCloseTask)
+                    Thread.Sleep(1000 * (state.Time - minTimeForCloseTask + 5));
+
+                SetOkStatus();
+            }
         }
 
         public string GetMessage()
@@ -50,6 +59,12 @@ namespace PhoneNumbersLayer.Implements
             }
 
             return _task.Number;
+        }
+
+        private void SetOkStatus()
+        {
+            string url = $"https://onlinesim.ru/api/setOperationOk.php?apikey={_phoneNumbersSettings.Token}&tzid={_task.Tzid}";
+            _httpSender.Send(HttpMethod.Get, url);
         }
 
         private TaskModel GetTaskModel()
