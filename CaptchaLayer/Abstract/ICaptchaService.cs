@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CaptchaLayer.Abstract
 {
-    public interface ICaptchaService<in T, out ResultT>
+    public interface ICaptchaService<in T, out CaptchaResultT, ServiceResultT>
     {
-        void Send(T captchaData);
-        ResultT Get();
+        ServiceResultT Send(T captchaData);
+        CaptchaResultT Get(ServiceResultT serviceResult);
     }
 }
