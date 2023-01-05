@@ -12,5 +12,6 @@ namespace AccountRegisterApplication.Models.AppSettings
         public ApplicationProxySettings ProxySettings { get; set; }
         public AplicationSmsManagerSettings AplicationSmsManagerSettings { get; set; }
         public ApplicationRuCaptchaSettings ApplicationRuCaptchaSettings { get; set; }
+        public ApplicationPersonalInfoSettings ApplicationPersonalInfoSettings { get; set; }
     }
 }

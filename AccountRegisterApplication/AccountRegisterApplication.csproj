@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\AppSettings\AplicationSmsManagerSettings.cs" />
+    <Compile Include="Models\AppSettings\ApplicationPersonalInfoSettings.cs" />
     <Compile Include="Models\AppSettings\ApplicationProxySettings.cs" />
     <Compile Include="Models\AppSettings\ApplicationRuCaptchaSettings.cs" />
     <Compile Include="Models\AppSettings\ApplicationSettings.cs" />

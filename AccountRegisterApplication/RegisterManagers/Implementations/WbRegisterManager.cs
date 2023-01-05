@@ -16,9 +16,12 @@ namespace AccountRegisterApplication.RegisterManagers.Implementations
     internal class WbRegisterManager : RegisterManager
     {
         private readonly WbBrowserActions _wbBrowserActions;
+        private readonly WbBuyerHttpManager _wbBuyerHttpManager;
+
         public WbRegisterManager(Instance instance, IZennoPosterProjectModel project, ApplicationSettings applicationSettings) : base(instance, project, applicationSettings)
         {
             _wbBrowserActions = new WbBrowserActions(instance);
+            _wbBuyerHttpManager = new WbBuyerHttpManager(instance, project);
         }
 
         public override void StartRegistration()
@@ -32,12 +35,16 @@ namespace AccountRegisterApplication.RegisterManagers.Implementations
                 _wbBrowserActions.ClickToContunueAfterWriteCaptchaCode();
                 string code = GetCode();
                 _wbBrowserActions.WriteSmsCode(code);
+                Thread.Sleep(3 * 1000);
+                _wbBrowserActions.GoToProfilePage();
             }
             finally
             {
                 PhoneNumberManager.Complete();
             }
         }
+
+
 
         private string GetCode()
         {

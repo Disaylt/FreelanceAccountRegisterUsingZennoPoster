@@ -24,6 +24,13 @@ namespace AccountRegisterApplication.RegisterServices.WB
             _instance.ActiveTab.Navigate("https://www.wildberries.ru/security/login");
         }
 
+        public void GoToProfilePage()
+        {
+            _instance.ActiveTab.Navigate("https://www.wildberries.ru/lk/details");
+            string elementXPath = "//div[@class='personal-data-page']";
+            WaitElement(elementXPath);
+        }
+
         public void WriteSmsCode(string code)
         {
             string elementXPath = "//input[@inputmode='tel' and @class='j-input-confirm-code val-msg']";
