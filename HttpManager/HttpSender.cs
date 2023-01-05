@@ -10,17 +10,17 @@ namespace HttpManager
 {
     public class HttpSender : IHttpSender, IDisposable
     {
-        private readonly HttpSettings _httpSettings;
-
-        public HttpSender(HttpSettings httpOption)
+        
+        public HttpSender(HttpSettings httpSettings)
         {
-            _httpSettings = httpOption;
+            HttpSettings = httpSettings;
             HttpClientHandler = new HttpClientHandler();
 
             SetProxy();
             SetCookies();
         }
 
+        public HttpSettings HttpSettings { get; }
         public HttpClientHandler HttpClientHandler { get; }
 
         public HttpResponseMessage Send(HttpMethod method, string url)
@@ -29,7 +29,7 @@ namespace HttpManager
             using (HttpRequestMessage request = new HttpRequestMessage(method, url))
             {
                 SetHeaders(request);
-                request.Version = _httpSettings.HttpVersion;
+                request.Version = HttpSettings.HttpVersion;
                 HttpResponseMessage httpResponse = httpClient.SendAsync(request).Result;
 
                 return httpResponse;
@@ -42,7 +42,7 @@ namespace HttpManager
             using (HttpRequestMessage request = new HttpRequestMessage(method, url))
             {
                 SetHeaders(request);
-                request.Version = _httpSettings.HttpVersion;
+                request.Version = HttpSettings.HttpVersion;
                 request.Content = httpContent;
 
                 HttpResponseMessage httpResponse = httpClient.SendAsync(request).Result;
@@ -53,7 +53,7 @@ namespace HttpManager
 
         private void SetHeaders(HttpRequestMessage httpRequestMessage)
         {
-            foreach (var headerPair in _httpSettings.Headers)
+            foreach (var headerPair in HttpSettings.Headers)
             {
                 httpRequestMessage.Headers.TryAddWithoutValidation(headerPair.Key, headerPair.Value);
             }
@@ -63,7 +63,7 @@ namespace HttpManager
         {
             HttpClientHandler.UseCookies = true;
             HttpClientHandler.CookieContainer = new CookieContainer(200, 200, 4096);
-            foreach (var cookie in _httpSettings.Cookies)
+            foreach (var cookie in HttpSettings.Cookies)
             {
                 HttpClientHandler.CookieContainer.Add(cookie);
             }
@@ -71,10 +71,10 @@ namespace HttpManager
 
         private void SetProxy()
         {
-            if (_httpSettings.Proxy != null)
+            if (HttpSettings.Proxy != null)
             {
                 HttpClientHandler.UseProxy = true;
-                HttpClientHandler.Proxy = _httpSettings.Proxy;
+                HttpClientHandler.Proxy = HttpSettings.Proxy;
             }
         }
 

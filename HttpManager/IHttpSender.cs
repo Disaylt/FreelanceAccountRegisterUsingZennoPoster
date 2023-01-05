@@ -9,6 +9,7 @@ namespace HttpManager
 {
     public interface IHttpSender
     {
+        HttpSettings HttpSettings { get; }
         HttpClientHandler HttpClientHandler { get; }
         HttpResponseMessage Send(HttpMethod method, string url);
         HttpResponseMessage Send(HttpMethod method, string url, HttpContent httpContent);
