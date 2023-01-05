@@ -28,7 +28,7 @@ namespace AccountRegisterApplication.RegisterServices.WB
         {
             string url = "https://www.wildberries.ru/webapi/personalinfo/fio";
             HttpContent content = JsonContent.Create(new { firstName = name });
-            HttpSender.Send(new HttpMethod("PATCH"), url, content);
+            Send(new HttpMethod("PATCH"), url, content);
         }
 
         public void SetGender(string gender)
@@ -39,13 +39,13 @@ namespace AccountRegisterApplication.RegisterServices.WB
                 {"sex", gender }
             };
             HttpContent content = new FormUrlEncodedContent(form);
-            HttpSender.Send(new HttpMethod("PATCH"), url, content);
+            Send(new HttpMethod("PATCH"), url, content);
         }
 
         public PersonalInfoModel GetPersonalInfo()
         {
             string url = "https://www.wildberries.ru/webapi/personalinfo";
-            HttpResponseMessage responseMessage = HttpSender.Send(HttpMethod.Post, url);
+            HttpResponseMessage responseMessage = Send(HttpMethod.Post, url);
             string content = responseMessage.Content.ReadAsStringAsync().Result;
             PersonalInfoModel personalInfo = JToken.Parse(content).ToObject<PersonalInfoModel>();
 
@@ -71,8 +71,7 @@ namespace AccountRegisterApplication.RegisterServices.WB
                 { "Cache-Control", "no-cache" },
                 { "TE", "trailers"}
             };
-
-            HttpSender.HttpSettings.Headers = headers;
+            SetHeaders(headers);
         }
     }
 }

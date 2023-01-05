@@ -13,6 +13,7 @@ namespace AccountRegisterApplication.RegisterServices.General
     internal abstract class InstanceHttpManager
     {
         private string _cookieDomain;
+        private readonly IHttpSender _httpSender;
 
         public InstanceHttpManager(Instance instance, string cookieDomain)
         {
@@ -20,14 +21,33 @@ namespace AccountRegisterApplication.RegisterServices.General
             _cookieDomain = cookieDomain;
 
             HttpSettings httpSettings = GetStartSettings(instance);
-            HttpSender = new HttpSender(httpSettings);
+            _httpSender = new HttpSender(httpSettings);
         }
 
         protected Instance Instance { get;  }
 
-        public IHttpSender HttpSender { get; private set; }
+        public HttpResponseMessage Send(HttpMethod method, string url, HttpContent httpContent)
+        {
+            UpdateCookies();
+            var response = _httpSender.Send(method, url, httpContent);
 
-        public void UpdateCookies()
+            return response;
+        }
+
+        public HttpResponseMessage Send(HttpMethod method, string url)
+        {
+            UpdateCookies();
+            var response = _httpSender.Send(method, url);
+
+            return response;
+        }
+
+        public void SetHeaders(Dictionary<string, string> headers)
+        {
+            _httpSender.HttpSettings.Headers = headers;
+        }
+
+        private void UpdateCookies()
         {
             List<Cookie> cookies = GetCookies(Instance);
             System.Net.CookieContainer cookieContainer = new System.Net.CookieContainer(200, 200, 4096);
@@ -35,7 +55,7 @@ namespace AccountRegisterApplication.RegisterServices.General
             {
                 cookieContainer.Add(cookie);
             }
-            HttpSender.HttpClientHandler.CookieContainer = cookieContainer;
+            _httpSender.HttpClientHandler.CookieContainer = cookieContainer;
         }
 
         private HttpSettings GetStartSettings(Instance instance)
