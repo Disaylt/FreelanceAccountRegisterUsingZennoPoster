@@ -92,6 +92,7 @@
     <Compile Include="RegisterServices\PhoneNumber\PhoneNumberManagerBuilder.cs" />
     <Compile Include="RegisterServices\Proxy\ProxyLoader.cs" />
     <Compile Include="RegisterServices\WB\WbBrowserActions.cs" />
+    <Compile Include="RegisterServices\WB\WbBuyerHttpManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="ValidateZennoPosterDllPath" BeforeTargets="BeforeBuild">
@@ -104,6 +105,9 @@
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2">
       <IncludeAssets>build</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="System.Net.Http.Json">
+      <Version>7.0.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -122,6 +126,10 @@
     <ProjectReference Include="..\CaptchaLayer\CaptchaLayer.csproj">
       <Project>{F95488B0-24E7-4750-A4EC-6F93EDFA654C}</Project>
       <Name>CaptchaLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HttpManager\HttpManager.csproj">
+      <Project>{9DBA8722-C1C9-4D3C-88FA-96FD5DBF048B}</Project>
+      <Name>HttpManager</Name>
     </ProjectReference>
     <ProjectReference Include="..\PhoneNumbersLayer\PhoneNumbersLayer.csproj">
       <Project>{4CD3DFE4-86D0-4014-BE27-43D58B56585C}</Project>

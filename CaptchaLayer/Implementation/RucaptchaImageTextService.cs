@@ -37,7 +37,7 @@ namespace CaptchaLayer.Implementation
             {
                 HttpResponseMessage response = _httpSender.Send(HttpMethod.Get, url);
                 string responseContent = response.Content.ReadAsStringAsync().Result;
-                RuCaptchaResult ruCaptchaResult = JObject.Parse(responseContent).ToObject<RuCaptchaResult>();
+                RuCaptchaResult ruCaptchaResult = JToken.Parse(responseContent).ToObject<RuCaptchaResult>();
 
                 if (ruCaptchaResult.Status == 1)
                     return ruCaptchaResult.Request;
@@ -58,7 +58,7 @@ namespace CaptchaLayer.Implementation
             HttpContent content = GetCaptchaRequestBody(base64);
             HttpResponseMessage response = _httpSender.Send(HttpMethod.Post, url, content);
             string responseContent = response.Content.ReadAsStringAsync().Result;
-            RuCaptchaResult ruCaptchaResult = JObject.Parse(responseContent).ToObject<RuCaptchaResult>();
+            RuCaptchaResult ruCaptchaResult = JToken.Parse(responseContent).ToObject<RuCaptchaResult>();
 
             return ruCaptchaResult;
         }

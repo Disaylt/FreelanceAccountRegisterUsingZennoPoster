@@ -99,7 +99,7 @@ namespace PhoneNumbersLayer.Implements
                 .Content
                 .ReadAsStringAsync()
                 .Result;
-            List<PhoneNumberStateModel> phoneNumbersStateModel = JObject.Parse(content).ToObject<List<PhoneNumberStateModel>>();
+            List<PhoneNumberStateModel> phoneNumbersStateModel = JToken.Parse(content).ToObject<List<PhoneNumberStateModel>>();
             PhoneNumberStateModel phoneNumberStateModel = phoneNumbersStateModel.First(x=> x.Tzid == _task.Tzid);
 
             return phoneNumberStateModel;
