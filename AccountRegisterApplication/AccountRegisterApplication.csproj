@@ -87,6 +87,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterManagers\Abstract\RegisterManager.cs" />
+    <Compile Include="RegisterServices\General\InstanceHttpManager.cs" />
     <Compile Include="RegisterManagers\Implementations\WbRegisterManager.cs" />
     <Compile Include="RegisterServices\General\BrowserTabService.cs" />
     <Compile Include="RegisterServices\PhoneNumber\PhoneNumberManagerBuilder.cs" />
