@@ -1,4 +1,5 @@
 ﻿using AccountRegisterApplication.Models.AppSettings;
+using AccountRegisterApplication.Models.WbBuyer;
 using AccountRegisterApplication.RegisterManagers.Abstract;
 using AccountRegisterApplication.RegisterServices.WB;
 using CaptchaLayer.Models;
@@ -37,6 +38,8 @@ namespace AccountRegisterApplication.RegisterManagers.Implementations
                 _wbBrowserActions.WriteSmsCode(code);
                 Thread.Sleep(3 * 1000);
                 _wbBrowserActions.GoToProfilePage();
+                SetPersonalInfo();
+                CheckPersonalInfo();
             }
             finally
             {
@@ -44,7 +47,20 @@ namespace AccountRegisterApplication.RegisterManagers.Implementations
             }
         }
 
+        private void CheckPersonalInfo()
+        {
+            Thread.Sleep(1000);
+            PersonalInfoModel personalInfoModel = _wbBuyerHttpManager.GetPersonalInfo();
 
+            if (personalInfoModel.Value.FirstName != UserFirstName || personalInfoModel.Value.GenderE != Settings.ApplicationPersonalInfoSettings.Gender)
+                throw new Exception("Bad personal info.");
+        }
+
+        private void SetPersonalInfo()
+        {
+            _wbBuyerHttpManager.SetGender(Settings.ApplicationPersonalInfoSettings.Gender);
+            _wbBuyerHttpManager.SetName(UserFirstName);
+        }
 
         private string GetCode()
         {
