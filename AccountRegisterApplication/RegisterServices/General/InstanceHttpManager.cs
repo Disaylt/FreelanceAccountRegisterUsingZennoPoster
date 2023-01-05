@@ -12,23 +12,24 @@ namespace AccountRegisterApplication.RegisterServices.General
 {
     internal abstract class InstanceHttpManager
     {
-        private Instance _instance;
         private string _cookieDomain;
 
         public InstanceHttpManager(Instance instance, string cookieDomain)
         {
-            _instance = instance;
+            Instance = instance;
             _cookieDomain = cookieDomain;
 
             HttpSettings httpSettings = GetStartSettings(instance);
             HttpSender = new HttpSender(httpSettings);
         }
 
+        protected Instance Instance { get;  }
+
         public IHttpSender HttpSender { get; private set; }
 
         public void UpdateCookies()
         {
-            List<Cookie> cookies = GetCookies(_instance);
+            List<Cookie> cookies = GetCookies(Instance);
             System.Net.CookieContainer cookieContainer = new System.Net.CookieContainer(200, 200, 4096);
             foreach (var cookie in cookies)
             {

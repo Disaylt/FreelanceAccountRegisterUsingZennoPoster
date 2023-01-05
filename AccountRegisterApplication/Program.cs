@@ -55,7 +55,6 @@ namespace AccountRegisterApplication
                     Token = "2114087ecebcff0dcf157c253eecf554"
                 }
             };
-
             RegisterManager registerManager = new WbRegisterManager(instance, project, applicationSettings);
             registerManager.StartRegistration();
 
