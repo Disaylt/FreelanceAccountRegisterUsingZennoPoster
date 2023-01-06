@@ -53,6 +53,12 @@ namespace AccountRegisterApplication
                 ApplicationRuCaptchaSettings = new ApplicationRuCaptchaSettings
                 {
                     Token = "2114087ecebcff0dcf157c253eecf554"
+                },
+                ApplicationPersonalInfoSettings = new ApplicationPersonalInfoSettings
+                {
+                    Gender = "Male",
+                    FemaleNames = new List<string> { "Юля", "Настя"},
+                    MaleNames = new List<string> { "Кузя", "Толя", "Макс"}
                 }
             };
             RegisterManager registerManager = new WbRegisterManager(instance, project, applicationSettings);

@@ -52,7 +52,7 @@ namespace AccountRegisterApplication.RegisterManagers.Abstract
 
         private void SetFirstName(ApplicationPersonalInfoSettings applicationPersonalInfoSettings)
         {
-            if(applicationPersonalInfoSettings.Gender.ToLower() == "male")
+            if (applicationPersonalInfoSettings.Gender.ToLower() == "male")
             {
                 UserFirstName = ChooseName(applicationPersonalInfoSettings.MaleNames);
             }
@@ -60,8 +60,10 @@ namespace AccountRegisterApplication.RegisterManagers.Abstract
             {
                 UserFirstName = ChooseName(applicationPersonalInfoSettings.FemaleNames);
             }
-
-            throw new Exception("First name not found for current gender.");
+            else
+            {
+                throw new Exception("First name not found for current gender.");
+            }
         }
 
         private string ChooseName(List<string> names)

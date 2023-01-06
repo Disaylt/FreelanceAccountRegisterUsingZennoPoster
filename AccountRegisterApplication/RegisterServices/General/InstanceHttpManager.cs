@@ -13,15 +13,16 @@ namespace AccountRegisterApplication.RegisterServices.General
     internal abstract class InstanceHttpManager
     {
         private string _cookieDomain;
-        private readonly IHttpSender _httpSender;
+        private IHttpSender _httpSender;
+        private readonly HttpSettings _httpSettings;
 
         public InstanceHttpManager(Instance instance, string cookieDomain)
         {
             Instance = instance;
             _cookieDomain = cookieDomain;
 
-            HttpSettings httpSettings = GetStartSettings(instance);
-            _httpSender = new HttpSender(httpSettings);
+            _httpSettings = GetStartSettings(instance);
+            _httpSender = new HttpSender(_httpSettings);
         }
 
         protected Instance Instance { get;  }
@@ -49,13 +50,8 @@ namespace AccountRegisterApplication.RegisterServices.General
 
         private void UpdateCookies()
         {
-            List<Cookie> cookies = GetCookies(Instance);
-            System.Net.CookieContainer cookieContainer = new System.Net.CookieContainer(200, 200, 4096);
-            foreach (var cookie in cookies)
-            {
-                cookieContainer.Add(cookie);
-            }
-            _httpSender.HttpClientHandler.CookieContainer = cookieContainer;
+            _httpSettings.Cookies = GetCookies(Instance);
+            _httpSender = new HttpSender(_httpSettings);
         }
 
         private HttpSettings GetStartSettings(Instance instance)
@@ -64,7 +60,7 @@ namespace AccountRegisterApplication.RegisterServices.General
             {
                 Cookies = GetCookies(instance),
                 Proxy = GetProxy(instance),
-                HttpVersion = new Version(2, 0)
+                HttpVersion = new Version(1, 1)
             };
 
             return httpSettings;
@@ -72,7 +68,7 @@ namespace AccountRegisterApplication.RegisterServices.General
 
         private IWebProxy GetProxy(Instance instance)
         {
-            string proxy = instance.GetProxy();
+            string proxy = instance.GetProxy().Replace("http://", string.Empty);
             string[] divideProxy = proxy.Split('@');
             string[] hostAndPort = divideProxy[1].Split(':');
             string host = hostAndPort[0];
@@ -93,6 +89,9 @@ namespace AccountRegisterApplication.RegisterServices.General
             var cookiesStr = instance.GetCookie(isCookieFormat: true);
 
             List<Cookie> cookies = new List<Cookie>();
+
+            if (string.IsNullOrEmpty(cookiesStr))
+                return cookies;
 
             foreach (string cookieStr in cookiesStr.Split(';'))
             {
