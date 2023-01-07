@@ -70,6 +70,7 @@ namespace PhoneNumbersLayer.Implements
                 PhoneNumberStateModel phoneNumberState = GetState();
                 if (phoneNumberState.Msg != null && phoneNumberState.Msg != _lastMessage)
                 {
+                    ReviceOperation();
                     _lastMessage = phoneNumberState.Msg;
                     return phoneNumberState.Msg;
                 }
@@ -78,6 +79,12 @@ namespace PhoneNumbersLayer.Implements
             }
 
             throw new NullReferenceException("Sms cod ewas not received.");
+        }
+
+        private void ReviceOperation()
+        {
+            string url = $"https://onlinesim.ru/api/setOperationRevise.php?apikey={_phoneNumbersSettings.Token}&tzid={_task.Tzid}";
+            _httpSender.Send(HttpMethod.Get, url);
         }
 
         private void SetOkStatus()
