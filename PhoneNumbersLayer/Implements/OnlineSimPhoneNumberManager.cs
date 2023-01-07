@@ -18,6 +18,7 @@ namespace PhoneNumbersLayer.Implements
         private readonly IHttpSender _httpSender;
         private readonly PhoneNumbersSettings _phoneNumbersSettings;
 
+        private string _lastMessage;
         private TaskModel _task;
 
         public OnlineSimPhoneNumberManager(PhoneNumbersSettings phoneNumbersSettings)
@@ -67,8 +68,11 @@ namespace PhoneNumbersLayer.Implements
             for(int currentAttempt = 0; currentAttempt < maxAttempt; currentAttempt++)
             {
                 PhoneNumberStateModel phoneNumberState = GetState();
-                if (phoneNumberState.Msg != null)
+                if (phoneNumberState.Msg != null && phoneNumberState.Msg != _lastMessage)
+                {
+                    _lastMessage = phoneNumberState.Msg;
                     return phoneNumberState.Msg;
+                }
 
                 Thread.Sleep(5 * 1000);
             }
