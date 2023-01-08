@@ -43,6 +43,7 @@ namespace AccountRegisterApplication.RegisterManagers.Implementations
                 _wbBrowserActions.GoToProfilePage();
                 SetPersonalInfo();
                 CheckPersonalInfo();
+                ConfrimAccountAndDeleteAllSessions();
 
                 AddAdditionalCookies();
 
@@ -53,6 +54,19 @@ namespace AccountRegisterApplication.RegisterManagers.Implementations
             finally
             {
                 PhoneNumberManager.Complete();
+            }
+        }
+
+        private void ConfrimAccountAndDeleteAllSessions()
+        {
+            _wbBuyerHttpManager.SendCodeForCloseSessions();
+            string code = PhoneNumberManager.GetMessage();
+            _wbBuyerHttpManager.ConfirmAccountRights(code);
+            int totalSessions = _wbBuyerHttpManager.GetSessions().Count;
+
+            if(totalSessions > 1)
+            {
+                _wbBuyerHttpManager.CloseOtherSessions();
             }
         }
 

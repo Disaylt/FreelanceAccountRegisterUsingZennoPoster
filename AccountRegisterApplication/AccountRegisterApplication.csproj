@@ -96,6 +96,7 @@
     <Compile Include="RegisterServices\General\InstanceHttpManager.cs" />
     <Compile Include="RegisterManagers\Implementations\WbRegisterManager.cs" />
     <Compile Include="RegisterServices\General\BrowserTabService.cs" />
+    <Compile Include="RegisterServices\General\JsonReader.cs" />
     <Compile Include="RegisterServices\MpSnake\MpSnakeApiManager.cs" />
     <Compile Include="RegisterServices\PhoneNumber\PhoneNumberManagerBuilder.cs" />
     <Compile Include="RegisterServices\Proxy\ProxyLoader.cs" />

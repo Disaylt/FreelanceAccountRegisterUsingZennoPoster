@@ -27,7 +27,7 @@ namespace AccountRegisterApplication.RegisterServices.General
 
         protected Instance Instance { get;  }
 
-        public HttpResponseMessage Send(HttpMethod method, string url, HttpContent httpContent)
+        protected HttpResponseMessage Send(HttpMethod method, string url, HttpContent httpContent)
         {
             UpdateCookies();
             var response = _httpSender.Send(method, url, httpContent);
@@ -35,7 +35,7 @@ namespace AccountRegisterApplication.RegisterServices.General
             return response;
         }
 
-        public HttpResponseMessage Send(HttpMethod method, string url)
+        protected HttpResponseMessage Send(HttpMethod method, string url)
         {
             UpdateCookies();
             var response = _httpSender.Send(method, url);
@@ -43,7 +43,7 @@ namespace AccountRegisterApplication.RegisterServices.General
             return response;
         }
 
-        public void SetHeaders(Dictionary<string, string> headers)
+        protected void SetHeaders(Dictionary<string, string> headers)
         {
             _httpSender.HttpSettings.Headers = headers;
         }
