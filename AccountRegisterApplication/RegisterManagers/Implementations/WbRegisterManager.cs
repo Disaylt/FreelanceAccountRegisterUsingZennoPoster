@@ -14,7 +14,7 @@ using ZennoLab.InterfacesLibrary.ProjectModel;
 
 namespace AccountRegisterApplication.RegisterManagers.Implementations
 {
-    internal class WbRegisterManager : RegisterManager
+    internal class WbRegisterManager : RegisterManager<WbAccountModel>
     {
         private readonly WbBrowserActions _wbBrowserActions;
         private readonly WbBuyerHttpManager _wbBuyerHttpManager;
@@ -47,11 +47,20 @@ namespace AccountRegisterApplication.RegisterManagers.Implementations
             }
         }
 
+        private void BuildAccount()
+        {
+            Account.Cookies = Instance.GetCookie(isCookieFormat: true);
+            Account.PhoneNumber = PhoneNumberManager.GetNumber();
+            Account.Gender = Settings.ApplicationPersonalInfoSettings.Gender;
+            Account.UserAgent = Project.Profile.UserAgent;
+            Account.IsActive = true;
+            Account.Name = UserFirstName;
+        }
+
         private void CheckPersonalInfo()
         {
             Thread.Sleep(1000);
             PersonalInfoModel personalInfoModel = _wbBuyerHttpManager.GetPersonalInfo();
-
             if (personalInfoModel.Value.FirstName != UserFirstName || personalInfoModel.Value.GenderE != Settings.ApplicationPersonalInfoSettings.Gender)
                 throw new Exception("Bad personal info.");
         }

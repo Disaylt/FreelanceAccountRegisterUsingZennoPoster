@@ -8,6 +8,7 @@ using PhoneNumbersLayer.Abstarct;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using ZennoLab.CommandCenter;
@@ -15,7 +16,7 @@ using ZennoLab.InterfacesLibrary.ProjectModel;
 
 namespace AccountRegisterApplication.RegisterManagers.Abstract
 {
-    internal abstract class RegisterManager
+    internal abstract class RegisterManager<AccountT> where AccountT : class, new()
     {
         private static readonly Random _random = new Random();
         private readonly ProxyLoader _proxyLoader;
@@ -31,9 +32,11 @@ namespace AccountRegisterApplication.RegisterManagers.Abstract
             SetProxy();
             SetFirstName(settings.ApplicationPersonalInfoSettings);
 
+            Account = new AccountT();
             PhoneNumberManager = GetPhoneNumberManager(settings);
             CaptchaService = new RucaptchaImageTextService(settings.ApplicationRuCaptchaSettings.Token);
         }
+        protected AccountT Account { get; }
         protected Instance Instance { get; }
         protected IZennoPosterProjectModel Project { get; }
         protected IPhoneNumberManager PhoneNumberManager { get; }
