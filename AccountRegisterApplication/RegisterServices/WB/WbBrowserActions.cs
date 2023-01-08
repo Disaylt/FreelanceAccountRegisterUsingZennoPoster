@@ -8,25 +8,20 @@ using ZennoLab.CommandCenter;
 
 namespace AccountRegisterApplication.RegisterServices.WB
 {
-    internal class WbBrowserActions
+    internal class WbBrowserActions : BrowserActions
     {
-        private readonly Instance _instance;
-        private readonly BrowserTabService _browserTabService;
-
-        public WbBrowserActions(Instance instance)
+        public WbBrowserActions(Instance instance) : base(instance)
         {
-            _instance = instance;
-            _browserTabService = new BrowserTabService(instance);
         }
 
         public void LoadRegisterPage()
         {
-            _instance.ActiveTab.Navigate("https://www.wildberries.ru/security/login");
+            Instance.ActiveTab.Navigate("https://www.wildberries.ru/security/login");
         }
 
         public void GoToProfilePage()
         {
-            _instance.ActiveTab.Navigate("https://www.wildberries.ru/lk/details");
+            Instance.ActiveTab.Navigate("https://www.wildberries.ru/lk/details");
             string elementXPath = "//div[@class='personal-data-page']";
             WaitElement(elementXPath);
         }
@@ -36,14 +31,14 @@ namespace AccountRegisterApplication.RegisterServices.WB
             string elementXPath = "//input[@inputmode='tel' and @class='j-input-confirm-code val-msg']";
             WaitElement(elementXPath);
 
-            _browserTabService.InputText(elementXPath, code);
+            BrowserTabService.InputText(elementXPath, code);
         }
 
         public void ClickToContunueAfterWriteCaptchaCode()
         {
             string elementXPath = "//button[@class='login__btn btn-main-lg']";
             WaitElement(elementXPath);
-            _browserTabService.Click(elementXPath);
+            BrowserTabService.Click(elementXPath);
         }
 
         public void InputCaptchaCode(string code)
@@ -51,7 +46,7 @@ namespace AccountRegisterApplication.RegisterServices.WB
             string elementXPath = "//input[@id='smsCaptchaCode']";
             WaitElement(elementXPath);
 
-            _browserTabService.InputText(elementXPath, code);
+            BrowserTabService.InputText(elementXPath, code);
         }
 
         public string GetRegisterCaptchaAsBase64()
@@ -59,7 +54,7 @@ namespace AccountRegisterApplication.RegisterServices.WB
             string elementXPath = "//img[@class='form-block__captcha-img']";
             WaitElement(elementXPath);
 
-            HtmlElement htmlElement = _browserTabService.GetHtmlElement(elementXPath);
+            HtmlElement htmlElement = BrowserTabService.GetHtmlElement(elementXPath);
             string srcValue = htmlElement.GetAttribute("src");
             string base64 = srcValue.Replace("data:image/jpeg;base64,", string.Empty);
 
@@ -70,7 +65,7 @@ namespace AccountRegisterApplication.RegisterServices.WB
         {
             string elementXPath = "//button[@id='requestCode']";
             WaitElement(elementXPath);
-            _browserTabService.Click(elementXPath);
+            BrowserTabService.Click(elementXPath);
 
         }
 
@@ -79,12 +74,12 @@ namespace AccountRegisterApplication.RegisterServices.WB
             string elementXPath = "//input[@inputmode='tel' and @class='input-item']";
             WaitElement(elementXPath);
 
-            _browserTabService.InputText(elementXPath, phoneNumberWithoutCode);
+            BrowserTabService.InputText(elementXPath, phoneNumberWithoutCode);
         }
 
         private void WaitElement(string xPath)
         {
-            bool isExists = _browserTabService.WaitElement(xPath, 20);
+            bool isExists = BrowserTabService.WaitElement(xPath, 20);
 
             if (!isExists)
                 throw new NullReferenceException($"{xPath} not found");

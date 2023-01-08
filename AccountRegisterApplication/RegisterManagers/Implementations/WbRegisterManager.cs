@@ -1,6 +1,7 @@
 ﻿using AccountRegisterApplication.Models.AppSettings;
 using AccountRegisterApplication.Models.WbBuyer;
 using AccountRegisterApplication.RegisterManagers.Abstract;
+using AccountRegisterApplication.RegisterServices.MpSnake;
 using AccountRegisterApplication.RegisterServices.WB;
 using CaptchaLayer.Models;
 using System;
@@ -18,11 +19,13 @@ namespace AccountRegisterApplication.RegisterManagers.Implementations
     {
         private readonly WbBrowserActions _wbBrowserActions;
         private readonly WbBuyerHttpManager _wbBuyerHttpManager;
+        private readonly MpSnakeApiManager _mpSnakeApiManager;
 
         public WbRegisterManager(Instance instance, IZennoPosterProjectModel project, ApplicationSettings applicationSettings) : base(instance, project, applicationSettings)
         {
             _wbBrowserActions = new WbBrowserActions(instance);
             _wbBuyerHttpManager = new WbBuyerHttpManager(instance, project);
+            _mpSnakeApiManager = new MpSnakeApiManager(applicationSettings.ApplicationMpSnakeSettings);
         }
 
         public override void StartRegistration()
@@ -40,11 +43,42 @@ namespace AccountRegisterApplication.RegisterManagers.Implementations
                 _wbBrowserActions.GoToProfilePage();
                 SetPersonalInfo();
                 CheckPersonalInfo();
+
+                AddAdditionalCookies();
+
+                BuildAccount();
+                SendAccount();
+                SaveProfileAsFile();
             }
             finally
             {
                 PhoneNumberManager.Complete();
             }
+        }
+
+        private void AddAdditionalCookies()
+        {
+            _wbBrowserActions.RefreshPage();
+            Thread.Sleep(10 * 1000);
+        }
+
+        private void SaveProfileAsFile()
+        {
+            if(Account.Id != 0)
+            {
+                string savePath = $@"{Settings.ProfilesSaveFolder}\{Account.PhoneNumber}_{Account.Id}";
+                Project.Profile.Save(savePath, saveLocalStorage: true);
+            }
+            else
+            {
+                throw new Exception("Bad account id");
+            }
+        }
+
+        private void SendAccount()
+        {
+            WbAccountModel wbAccount = _mpSnakeApiManager.SendAccountToDb(Account);
+            Account.Id = wbAccount.Id;
         }
 
         private void BuildAccount()
@@ -55,6 +89,7 @@ namespace AccountRegisterApplication.RegisterManagers.Implementations
             Account.UserAgent = Project.Profile.UserAgent;
             Account.IsActive = true;
             Account.Name = UserFirstName;
+            Account.RegisterProxy = Proxy;
         }
 
         private void CheckPersonalInfo()
