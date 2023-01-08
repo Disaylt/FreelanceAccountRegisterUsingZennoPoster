@@ -52,6 +52,36 @@ namespace AccountRegisterApplication.RegisterServices.WB
             return personalInfo;
         }
 
+        public void CloseOtherSessions()
+        {
+            string url = "https://www.wildberries.ru/webapi/lk/account/mysafety/finishothersessions";
+            Send(HttpMethod.Post, url);
+        }
+
+        public void ConfirmAccountRights(string code)
+        {
+            string url = "https://www.wildberries.ru/webapi/lk/user/checkconfirmcode?forAction=ConfirmPhone";
+            Dictionary<string, string> form = new Dictionary<string, string> { { "confirmCode", code } };
+            HttpContent httpContent = new FormUrlEncodedContent(form);
+            Send(HttpMethod.Post, url, httpContent);
+        }
+
+        public void SendCodeForCloseSessions()
+        {
+            string url = "https://www.wildberries.ru/webapi/lk/mobile/requestconfirmcode?forAction=ConfirmPhone";
+            Send(HttpMethod.Post, url);
+        }
+
+        public List<SessionModel> GetSessions()
+        {
+            string url = "https://www.wildberries.ru/webapi/lk/details/data?";
+            HttpResponseMessage responseMessage = Send(HttpMethod.Post, url);
+            string content = responseMessage.Content.ReadAsStringAsync().Result;
+            List<SessionModel> personalInfo = JToken.Parse(content)["value"]["data"]["mySafety"]["sessions"].ToObject<List<SessionModel>>();
+
+            return personalInfo;
+        }
+
         private void SetWbHeaders(IZennoPosterProjectModel project)
         {
             Dictionary<string, string> headers = new Dictionary<string, string>

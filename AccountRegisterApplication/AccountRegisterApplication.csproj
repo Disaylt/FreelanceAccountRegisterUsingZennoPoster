@@ -87,6 +87,7 @@
     <Compile Include="Models\AppSettings\ApplicationRuCaptchaSettings.cs" />
     <Compile Include="Models\AppSettings\ApplicationSettings.cs" />
     <Compile Include="Models\WbBuyer\PersonalInfoModel.cs" />
+    <Compile Include="Models\WbBuyer\SessionModel.cs" />
     <Compile Include="Models\WbBuyer\WbAccountModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
