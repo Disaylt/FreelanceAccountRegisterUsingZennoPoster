@@ -14,5 +14,6 @@ namespace AccountRegisterApplication.Models.AppSettings
         public AplicationSmsManagerSettings AplicationSmsManagerSettings { get; set; }
         public ApplicationRuCaptchaSettings ApplicationRuCaptchaSettings { get; set; }
         public ApplicationPersonalInfoSettings ApplicationPersonalInfoSettings { get; set; }
+        public ApplicationMpSnakeSettings ApplicationMpSnakeSettings { get; set; }
     }
 }
