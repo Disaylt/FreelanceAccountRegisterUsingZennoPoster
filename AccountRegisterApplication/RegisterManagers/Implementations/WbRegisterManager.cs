@@ -46,7 +46,7 @@ namespace AccountRegisterApplication.RegisterManagers.Implementations
                 ConfrimAccountAndDeleteAllSessions();
 
                 AddAdditionalCookies();
-
+                
                 BuildAccount();
                 SendAccount();
                 SaveProfileAsFile();

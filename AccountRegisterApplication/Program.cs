@@ -1,6 +1,9 @@
 ﻿using AccountRegisterApplication.Models.AppSettings;
+using AccountRegisterApplication.Models.WbBuyer;
 using AccountRegisterApplication.RegisterManagers.Abstract;
 using AccountRegisterApplication.RegisterManagers.Implementations;
+using AccountRegisterApplication.RegisterServices.General;
+using Global.ZennoLab.Json;
 using PhoneNumbersLayer.Models;
 using System;
 using System.Collections.Generic;
@@ -33,35 +36,10 @@ namespace AccountRegisterApplication
         {
             int executionResult = 0;
 
-            ApplicationSettings applicationSettings = new ApplicationSettings
-            {
-                Site = "wb",
-                ProxySettings = new ApplicationProxySettings
-                {
-                    FileName = "proxiesList.txt",
-                    LoaderType = "txt"
-                },
-                AplicationSmsManagerSettings = new AplicationSmsManagerSettings
-                {
-                    ServiceName = "onlineSim",
-                    PhoneNumbersSettings = new PhoneNumbersSettings
-                    {
-                        Service = "wildberries",
-                        Token = "b3967D3nJz6H6Cx-N1rE81Ap-v1t6563G-c6h2MV6m-2AbSRv4K33XkQ32"
-                    }
-                },
-                ApplicationRuCaptchaSettings = new ApplicationRuCaptchaSettings
-                {
-                    Token = "2114087ecebcff0dcf157c253eecf554"
-                },
-                ApplicationPersonalInfoSettings = new ApplicationPersonalInfoSettings
-                {
-                    Gender = "Male",
-                    FemaleNames = new List<string> { "Юля", "Настя"},
-                    MaleNames = new List<string> { "Кузя", "Толя", "Макс"}
-                }
-            };
-            RegisterManager registerManager = new WbRegisterManager(instance, project, applicationSettings);
+            string jsonSettingsPath = "settings.json";
+            JsonReader<ApplicationSettings> jsonReader = new JsonReader<ApplicationSettings>(jsonSettingsPath);
+            ApplicationSettings applicationSettings = jsonReader.Read();
+            RegisterManager<WbAccountModel> registerManager = new WbRegisterManager(instance, project, applicationSettings);
             registerManager.StartRegistration();
 
             return executionResult;
