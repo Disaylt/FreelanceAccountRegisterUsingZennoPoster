@@ -124,7 +124,7 @@ namespace AccountRegisterApplication.RegisterManagers.Implementations
         {
             string message = PhoneNumberManager.GetMessage();
             string fourNumberCode;
-            if(message.Length > 4)
+            if(message.Length > 6)
             {
                 fourNumberCode = message.Substring(message.Length - 4);
             }

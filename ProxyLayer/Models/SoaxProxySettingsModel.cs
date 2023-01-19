@@ -11,7 +11,7 @@ namespace ProxyLayer.Models
         public string Host { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
-        public int MaxProt { get; set; }
+        public int MaxPort { get; set; }
         public int MinPort { get; set; }
     }
 }

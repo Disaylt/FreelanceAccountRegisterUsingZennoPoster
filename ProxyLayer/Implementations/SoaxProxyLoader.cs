@@ -20,7 +20,7 @@ namespace ProxyLayer.Implementations
 
         public string Get()
         {
-            int port = _random.Next(_settings.MinPort, _settings.MaxProt);
+            int port = _random.Next(_settings.MinPort, _settings.MaxPort);
             string proxy = $"http://{_settings.Login}:{_settings.Password}@{_settings.Host}:{port}";
 
             return proxy;

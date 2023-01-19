@@ -24,7 +24,7 @@ namespace AccountRegisterApplication.RegisterServices.MpSnake
 
         public WbAccountModel SendAccountToDb(WbAccountModel wbAccount)
         {
-            string url = "https://localhost:7229/api/v1/wbbuyeraccounts/add";
+            string url = "https://mp-snake.ru/api/v1/wbbuyeraccounts/add";
             HttpContent httpContent = JsonContent.Create(wbAccount);
             HttpResponseMessage httpResponse = _httpSender.Send(HttpMethod.Post, url, httpContent);
             string content = httpResponse.Content.ReadAsStringAsync().Result;
