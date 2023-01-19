@@ -41,6 +41,9 @@ namespace AccountRegisterApplication.RegisterServices.Proxy
                 case "txt":
                     proxyLoaderFactory = new TxtProxyLoaderFactory(_proxySettings.FileName);
                     break;
+                case "soax":
+                    proxyLoaderFactory = new SoaxProxyLoaderFactory(_proxySettings.SoaxProxySettings);
+                    break;
                 default:
                     throw new NullReferenceException($"Proxy loader type {_proxySettings.LoaderType} not found.");
             }

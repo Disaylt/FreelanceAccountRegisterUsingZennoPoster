@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProxyLayer.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,5 +11,6 @@ namespace AccountRegisterApplication.Models.AppSettings
     {
         public string LoaderType { get; set; }
         public string FileName { get; set; }
+        public SoaxProxySettingsModel SoaxProxySettings { get; set; }
     }
 }
