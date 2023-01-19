@@ -64,7 +64,7 @@ namespace PhoneNumbersLayer.Implements
 
         private string WaitMassage()
         {
-            int maxAttempt = 5;
+            int maxAttempt = 15;
             for(int currentAttempt = 0; currentAttempt < maxAttempt; currentAttempt++)
             {
                 PhoneNumberStateModel phoneNumberState = GetState();

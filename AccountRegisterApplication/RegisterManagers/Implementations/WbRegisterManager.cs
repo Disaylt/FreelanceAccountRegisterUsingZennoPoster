@@ -138,6 +138,7 @@ namespace AccountRegisterApplication.RegisterManagers.Implementations
 
         private void WriteCaptchaCode()
         {
+            Thread.Sleep(3 * 1000);
             string base64Captcha = _wbBrowserActions.GetRegisterCaptchaAsBase64();
             RuCaptchaResult ruCaptchaResult = CaptchaService.Send(base64Captcha);
             Thread.Sleep(10 * 1000);
