@@ -43,8 +43,11 @@
   <ItemGroup>
     <Compile Include="Abstract\IProxyLoader.cs" />
     <Compile Include="Factory\IProxyLoaderFactory.cs" />
+    <Compile Include="Factory\SoaxProxyLoaderFactory.cs" />
     <Compile Include="Factory\TxtProxyLoaderFactory.cs" />
+    <Compile Include="Implementations\SoaxProxyLoader.cs" />
     <Compile Include="Implementations\TxtProxyLoader.cs" />
+    <Compile Include="Models\SoaxProxySettingsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
