@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace AccountRegisterApplication.Models.AppSettings
 {
-    internal class Settings
+    internal class ApplicationMpSnakeSettings
     {
-        public string Site { get; set; }
+        public string Token { get; set; }
     }
 }

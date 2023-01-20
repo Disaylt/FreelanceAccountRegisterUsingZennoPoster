@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AccountRegisterApplication.RegisterManager.Abstract
+namespace ProxyLayer.Abstract
 {
-    internal interface IRegisterManager
+    public interface IProxyLoader
     {
-        void StartRegistration();
+        string Get();
     }
 }

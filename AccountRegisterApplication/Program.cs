@@ -1,5 +1,10 @@
-﻿using AccountRegisterApplication.RegisterManager.Abstract;
-using AccountRegisterApplication.RegisterManager.Implementations;
+﻿using AccountRegisterApplication.Models.AppSettings;
+using AccountRegisterApplication.Models.WbBuyer;
+using AccountRegisterApplication.RegisterManagers.Abstract;
+using AccountRegisterApplication.RegisterManagers.Implementations;
+using AccountRegisterApplication.RegisterServices.General;
+using Global.ZennoLab.Json;
+using PhoneNumbersLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,7 +36,10 @@ namespace AccountRegisterApplication
         {
             int executionResult = 0;
 
-            IRegisterManager registerManager = new WbRegisterManager(instance, project);
+            string jsonSettingsPath = "settings.json";
+            JsonReader<ApplicationSettings> jsonReader = new JsonReader<ApplicationSettings>(jsonSettingsPath);
+            ApplicationSettings applicationSettings = jsonReader.Read();
+            RegisterManager<WbAccountModel> registerManager = new WbRegisterManager(instance, project, applicationSettings);
             registerManager.StartRegistration();
 
             return executionResult;
