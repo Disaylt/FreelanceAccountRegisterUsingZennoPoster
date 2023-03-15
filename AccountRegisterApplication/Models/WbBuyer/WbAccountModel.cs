@@ -16,6 +16,7 @@ namespace AccountRegisterApplication.Models.WbBuyer
         public string Cookies { get; set; }
         public string UserAgent { get; set; }
         public string RegisterProxy { get; set; }
+        public string NormalizedGender { get; set; }
         public bool IsActive { get; set; }
     }
 }

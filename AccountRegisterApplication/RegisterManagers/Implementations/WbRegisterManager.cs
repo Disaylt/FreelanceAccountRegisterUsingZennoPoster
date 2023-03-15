@@ -100,6 +100,7 @@ namespace AccountRegisterApplication.RegisterManagers.Implementations
             Account.Cookies = Instance.GetCookie(isCookieFormat: true);
             Account.PhoneNumber = PhoneNumberManager.GetNumber();
             Account.Gender = Settings.ApplicationPersonalInfoSettings.Gender;
+            Account.NormalizedGender = Settings.ApplicationPersonalInfoSettings.Gender.ToUpper();
             Account.UserAgent = Project.Profile.UserAgent;
             Account.IsActive = true;
             Account.Name = UserFirstName;
